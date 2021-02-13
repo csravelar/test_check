@@ -1,0 +1,21 @@
+version: '3'
+
+services:
+  checkmarx-github-action-linux:
+    platform: linux
+    image: ${PKG_NAME}-linux:latest
+    container_name: ${PKG_NAME}-linux
+    hostname: ${PKG_NAME}-linux
+    build:
+      context: ./
+      dockerfile: Dockerfile-linux
+    env_file: .env-sample
+  checkmarx-github-action-windows:
+    platform: windows
+    image: ${PKG_NAME}-windows:latest
+    container_name: ${PKG_NAME}-windows
+    hostname: ${PKG_NAME}-windows
+    build:
+      context: ./
+      dockerfile: Dockerfile-windows
+    env_file: .env-sample

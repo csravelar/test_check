@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CxXMLResults InitiatorName="Miguel Freitas" Owner="miguel" ScanId="1000052" ProjectId="6" ProjectName="checkmarx-github-action-master" TeamFullPathOnReportDate="CxServer\SP\EMEA" DeepLink="https://cxprivatecloud.checkmarx.net/CxWebClient/ViewerMain.aspx?scanid=1000052&amp;projectid=6" ScanStart="Monday, June 15, 2020 11:12:20 AM" Preset="Checkmarx Default" ScanTime="00h:01m:12s" LinesOfCodeScanned="4604" FilesScanned="13" ReportCreationTime="Monday, June 15, 2020 8:56:51 PM" Team="EMEA" CheckmarxVersion="9.0.0.40085 HF1" ScanComments="git master@facff162845a8332880e780f7cec71927aac746a" ScanType="Full" SourceOrigin="LocalPath" Visibility="Public">
+  <Query id="2727" categories="PCI DSS v3.2;PCI DSS (3.2) - 6.5.10 - Broken authentication and session management,OWASP Top 10 2013;A2-Broken Authentication and Session Management,FISMA 2014;Identification And Authentication,NIST SP 800-53;SC-28 Protection of Information at Rest (P1),OWASP Top 10 2017;A2-Broken Authentication" cweId="259" name="Client_Server_Empty_Password" group="JavaScript_Low_Visibility" Severity="Low" Language="JavaScript" LanguageHash="0935562945055365" LanguageChangeDate="2020-05-19T00:00:00.0000000" SeverityIndex="1" QueryPath="JavaScript\Cx\JavaScript Low Visibility\Client Server Empty Password Version:1" QueryVersionCode="81017357">
+    <Result NodeId="10000520001" FileName="src/cli/token.js" Status="Recurrent" Line="28" Column="13" FalsePositive="False" Severity="Low" AssignToUser="" state="0" Remark="" DeepLink="https://cxprivatecloud.checkmarx.net/CxWebClient/ViewerMain.aspx?scanid=1000052&amp;projectid=6&amp;pathid=1" SeverityIndex="1">
+      <Path ResultId="1000052" PathId="1" SimilarityId="2136262186">
+        <PathNode>
+          <FileName>src/cli/token.js</FileName>
+          <Line>28</Line>
+          <Column>13</Column>
+          <NodeId>1</NodeId>
+          <Name>password</Name>
+          <Type></Type>
+          <Length>8</Length>
+          <Snippet>
+            <Line>
+              <Number>28</Number>
+              <Code>        let password = ""</Code>
+            </Line>
+          </Snippet>
+        </PathNode>
+      </Path>
+    </Result>
+  </Query>
+  <Query id="3933" categories="FISMA 2014;Identification And Authentication,NIST SP 800-53;SC-28 Protection of Information at Rest (P1),OWASP Top 10 2017;A3-Sensitive Data Exposure" cweId="259" name="Use_Of_Hardcoded_Password" group="JavaScript_Server_Side_Vulnerabilities" Severity="Low" Language="JavaScript" LanguageHash="0935562945055365" LanguageChangeDate="2020-05-19T00:00:00.0000000" SeverityIndex="1" QueryPath="JavaScript\Cx\JavaScript Server Side Vulnerabilities\Use Of Hardcoded Password Version:1" QueryVersionCode="97095146">
+    <Result NodeId="10000520002" FileName="src/github/inputs.js" Status="Recurrent" Line="9" Column="21" FalsePositive="False" Severity="Low" AssignToUser="" state="0" Remark="" DeepLink="https://cxprivatecloud.checkmarx.net/CxWebClient/ViewerMain.aspx?scanid=1000052&amp;projectid=6&amp;pathid=2" SeverityIndex="1">
+      <Path ResultId="1000052" PathId="2" SimilarityId="99642897">
+        <PathNode>
+          <FileName>src/github/inputs.js</FileName>
+          <Line>9</Line>
+          <Column>21</Column>
+          <NodeId>1</NodeId>
+          <Name>"cxPassword"</Name>
+          <Type></Type>
+          <Length>12</Length>
+          <Snippet>
+            <Line>
+              <Number>9</Number>
+              <Code>const CX_PASSWORD = 'cxPassword'</Code>
+            </Line>
+          </Snippet>
+        </PathNode>
+        <PathNode>
+          <FileName>src/github/inputs.js</FileName>
+          <Line>9</Line>
+          <Column>7</Column>
+          <NodeId>2</NodeId>
+          <Name>CX_PASSWORD</Name>
+          <Type></Type>
+          <Length>11</Length>
+          <Snippet>
+            <Line>
+              <Number>9</Number>
+              <Code>const CX_PASSWORD = 'cxPassword'</Code>
+            </Line>
+          </Snippet>
+        </PathNode>
+        <PathNode>
+          <FileName>src/github/inputs.js</FileName>
+          <Line>181</Line>
+          <Column>18</Column>
+          <NodeId>3</NodeId>
+          <Name>CX_PASSWORD</Name>
+          <Type></Type>
+          <Length>11</Length>
+          <Snippet>
+            <Line>
+              <Number>181</Number>
+              <Code>    CX_PASSWORD: CX_PASSWORD,</Code>
+            </Line>
+          </Snippet>
+        </PathNode>
+        <PathNode>
+          <FileName>src/github/inputs.js</FileName>
+          <Line>181</Line>
+          <Column>5</Column>
+          <NodeId>4</NodeId>
+          <Name>CX_PASSWORD</Name>
+          <Type></Type>
+          <Length>11</Length>
+          <Snippet>
+            <Line>
+              <Number>181</Number>
+              <Code>    CX_PASSWORD: CX_PASSWORD,</Code>
+            </Line>
+          </Snippet>
+        </PathNode>
+      </Path>
+    </Result>
+  </Query>
+</CxXMLResults>

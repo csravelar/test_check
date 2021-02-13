@@ -1,0 +1,51 @@
+{
+  "name": "checkmarx-github-action",
+  "version": "v1.0.4",
+  "description": "Checkmarx Github Action",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "test": "mocha tests/* --recursive",
+    "test:index": "mocha tests/index.spec.js",
+    "test:utils": "mocha tests/utils.spec.js",
+    "test:cli": "mocha tests/cli.spec.js",
+    "test:osa": "mocha tests/osa.spec.js",
+    "test:token": "mocha tests/token.spec.js",
+    "test:sast": "mocha tests/sast.spec.js",
+    "test:github": "mocha tests/github.spec.js",
+    "lint": "jslint src/**",
+    "cov": "nyc -x tests -r html --report-dir=coverage npm test",
+    "cov:check": "nyc check-coverage --functions 70 --lines 0 --per-file"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/checkmarx-ts/checkmarx-github-action.git"
+  },
+  "keywords": [
+    "github",
+    "action",
+    "checkmarx",
+    "security"
+  ],
+  "author": "Miguel Freitas <miguel.freitas@checkmarx.com>",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/checkmarx-ts/checkmarx-github-action/issues"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/"
+  },
+  "homepage": "https://github.com/checkmarx-ts/checkmarx-github-action#readme",
+  "dependencies": {
+    "@actions/core": "^1.2.6",
+    "@actions/exec": "^1.0.4",
+    "@actions/github": "^4.0.0",
+    "dotenv": "^8.2.0",
+    "xml-js": "^1.6.11"
+  },
+  "devDependencies": {
+    "jslint-node": "^1.2.8",
+    "mocha": "^8.2.1",
+    "nyc": "^15.1.0"
+  }
+}

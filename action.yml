@@ -1,0 +1,405 @@
+name: 'Checkmarx Scan'
+description: 'Find vulnerabilities in your code using Checkmarx SAST solution'
+author: 'Miguel Freitas'
+inputs:
+  cxAction:
+    description: 'Checkmarx CLI Action'
+    required: false
+    default: 'Scan'
+  cxVersion:
+    description: 'Checkmarx Version'
+    required: false
+    default: '8.9'
+  cxServer:
+    description: 'IP address or resolvable name of CxSAST web server.'
+    required: true
+    default: 'https://company.checkmarx.com'
+  cxUsername:
+    description: 'Checkmarx Username'
+    required: true
+    default: 'first.last@company.com'
+  cxToken:
+    description: 'Checkmarx Token'
+    required: false
+    default: ''
+  cxPassword:
+    description: 'Checkmarx Password'
+    required: true
+    default: ''
+  cxTeam:
+    description: 'Checkmarx Team'
+    required: true
+    default: ''
+  cxProject:
+    description: 'Checkmarx Project Name'
+    required: false
+    default: ''
+  cxPreset:
+    description: 'If not provided, will use preset defined in existing project or, for a new project, the default preset.'
+    required: false
+    default: 'Checkmarx Default'
+  cxHigh:
+    description: 'Threshold for High Severity Vulnerabilities'
+    required: false
+    default: -1
+  cxMedium:
+    description: 'Threshold for Medium Severity Vulnerabilities'
+    required: false
+    default: -1
+  cxLow:
+    description: 'Threshold for Low Severity Vulnerabilities'
+    required: false
+    default: -1
+  cxComment:
+    description: 'Saves a comment with the scan results. For example -comment important scan.'
+    required: false
+    default: ''
+  cxForceScan:
+    description: 'Force scan on source code, which has not been changed since the last scan of the same project. (Not compatible with -Incremental option.)'
+    required: false
+    default: false
+  cxIncremental:
+    description: 'Run incremental scan instead of a full scan.'
+    required: false
+    default: false
+  cxExcludeFolders:
+    description: 'Comma separated list of folder name patterns to exclude from scan. For example, exclude all test and log folders: -locationPathExclude test*,log_*'
+    required: false
+    default: ''
+  cxExcludeFiles:
+    description: 'Comma separated list of file name patterns to exclude from scan. For example, exclude all files with .class extension: -locationFilesExclude *.class'
+    required: false
+    default: ''
+  cxConfiguration:
+    description: 'Code language configuration. Possible values are : Default Configuration, Japanese (Shift-JIS). If configuration is not set, Default Configuration is used.'
+    required: false
+    default: 'Default Configuration'
+  cxPrivate:
+    description: 'Scan will not be visible to other users.'
+    required: false
+    default: false
+  cxReportXML:
+    description: 'SAST Scan Report in XML format'
+    required: false
+    default: ''
+  cxReportPDF:
+    description: 'SAST Scan Report in PDF format'
+    required: false
+    default: ''
+  cxReportRTF:
+    description: 'SAST Scan Report in RTF format'
+    required: false
+    default: ''
+  cxReportCSV:
+    description: 'SAST Scan Report in CSV format'
+    required: false
+    default: ''
+  cxLog:
+    description: 'Log file to be created.'
+    required: false
+    default: ''
+  cxVerbose:
+    description: 'Turns on verbose mode. All messages and events will be sent to the console or log file.'
+    required: false
+    default: true
+  cxOsaHigh:
+    description: 'OSA high severity vulnerability threshold. If the number of high vulnerabilities exceeds the threshold, scan will end with an error (see Error/Exit Codes).'
+    required: false
+    default: -1
+  cxOsaMedium:
+    description: 'OSA medium severity vulnerability threshold. If the number of medium vulnerabilities exceeds the threshold, scan will end with an error (see Error/Exit Codes).'
+    required: false
+    default: -1
+  cxOsaLow:
+    description: 'OSA low severity vulnerability threshold. If the number of high vulnerabilities exceeds the threshold, scan will end with an error (see Error/Exit Codes).'
+    required: false
+    default: -1
+  cxOsaLocationPath:
+    description: 'Local or network path to sources or source repository branch. May include multiple list of folders (local or shared) separated by comma.'
+    required: false
+    default: ''
+  cxOsaArchiveToExtract:
+    description: 'Comma separated list of file extensions to extract in the OSA scan.
+    For example: -OsaArchiveToExtract *.zip extracts only files with .zip extension.'
+    required: false
+    default: ''
+  cxOsaFilesInclude:
+    description: 'Comma separated list of file name patterns to exclude from the OSA scan. 
+    For example: *.dll will include only dll files.'
+    required: false
+    default: ''
+  cxOsaFilesExclude:
+    description: 'Comma separated list of file name patterns to exclude from the OSA scan. 
+    Exclude extensions by using *.<extension>, or exclude files by using */<file>.
+    Examples: -OsaFilesExclude *.class excludes all files which start with the .class.
+    Examples: -OsaFilesExclude */plexus-utils-1.5.6.jar excludes all files which start with plexus-utils-1.5.6.jar.'
+    required: false
+    default: ''
+  cxOsaPathExclude:
+    description: 'Comma separated list of folder path patterns to exclude from the OSA scan. 
+    For example: -OsaPathExclude test excludes all folders which start with test prefix.'
+    required: false
+    default: ''
+  cxOsaReportHtml:
+    description: 'Generate CxOSA HTML report.'
+    required: false
+    default: ''
+  cxOsaReportPDF:
+    description: 'Generate CxOSA PDF report.'
+    required: false
+    default: ''
+  cxOsaDepth:
+    description: 'Extraction depth of files to include in the OSA scan.'
+    required: false
+    default: ''
+  cxExecutePackageDependency:
+    description: 'Retrieve all supported package dependencies before performing OSA scan (see Remarks section).'
+    required: false
+    default: false
+  cxOsaJson:
+    description: 'Generate CxOSA JSON report.'
+    required: false
+    default: ''
+  cxScaUsername:
+    description: 'SCA Username'
+    required: false
+    default: ''
+  cxScaPassword:
+    description: 'SCA Password'
+    required: false
+    default: ''
+  cxScaAccount:
+    description: 'SCA Account Name'
+    required: false
+    default: ''
+  cxScaApiUrl:
+    description: 'SCA API URL'
+    required: false
+    default: ''
+  cxScaAcessControlUrl:
+    description: 'SCA Access Control URL'
+    required: false
+    default: ''
+  cxScaWebAppUrl:
+    description: 'SCA Web App URL'
+    required: false
+    default: ''
+  cxScaHigh:
+    description: 'SCA High Threshold'
+    required: false
+    default: -1
+  cxScaMedium:
+    description: 'SCA Medium Threshold'
+    required: false
+    default: -1
+  cxScaLow:
+    description: 'SCA Low Threshold'
+    required: false
+    default: -1
+  cxScaLocationPath:
+    description: 'SCA Location Path'
+    required: false
+    default: ''
+  cxScaFilesInclude:
+    description: 'SCA Files Include'
+    required: false
+    default: ''
+  cxScaFilesExclude:
+    description: 'SCA Files Exclude'
+    required: false
+    default: ''
+  cxScaPathExclude:
+    description: 'SCA Folders Exclude'
+    required: false
+    default: ''
+  cxCheckPolicy:
+    description: 'This parameter will break the build if the CxOSA policy is violated.'
+    required: false
+    default: false
+  cxSkipIfFail:
+    description: 'Skip Checkmarx Action Step if Fail'
+    required: false
+    default: false
+  cxTrustedCertificates:
+    description: 'Trust Self-signed Certificates'
+    required: false
+    default: false
+  cxGithubToken:
+    description: 'Github Token Secret'
+    required: false
+    default: ''
+  cxGithubIssues:
+    description: 'Create Github Issues'
+    required: false
+    default: false
+  cxGithubLabels:
+    description: 'Github Labels for Issues created'
+    required: false
+    default: 'bug'
+  cxGithubAssignees:
+    description: 'Github Assignees for Issues created'
+    required: false
+    default: ''
+  cxGithubMilestone:
+    description: 'Github Milestone for Issues created'
+    required: false
+    default: null
+outputs:
+  cxActionId:
+    description: 'Github Action ID (e.g. self)'
+  cxRunId:
+    description: 'Github Run ID (e.g. 130420638)'
+  cxWorkflow:
+    description: 'Github Workflow Name (e.g. My Workflow)'
+  cxWorkflowUser:
+    description: 'Github Workflow Actor (e.g. miguelfreitas93)'
+  cxEvent:
+    description: 'Github Event Name (e.g. push)'
+  cxRepository:
+    description: 'Github Repository Name (e.g. user/repository)'
+  cxBranch:
+    description: 'Github Repository Branch (e.g. refs/heads/master)'
+  cxHeadBranch:
+    description: 'Github Repository Head Branch - Pull Requests (e.g. refs/heads/master)'
+  cxBaseBranch:
+    description: 'Github Repository Base Branch - Pull Requests (e.g. refs/heads/master)'
+  cxWorkspace:
+    description: 'Github Workspace Path (e.g. /home/runner/work/checkmarx-github-action/checkmarx-github-action)'
+  cxCommitSHA:
+    description: 'Github Commit SHA (e.g. 5748bf5c580dd1ce8853f26eebe123754692c18e)'
+  cxVersion:
+    description: 'Checkmarx CLI Version used (e.g. 2020.2.11)'
+  cxServer:
+    description: 'Checkmarx Server URL (e.g. https://company.checkmarx.com)'
+  cxAction:
+    description: 'Checkmarx CLI Action (e.g. Scan)'
+  cxLog:
+    description: 'Checkmarx CLI Log File Path (e.g. /home/runner/work/checkmarx-github-action/checkmarx-github-action/log.log)'
+  cxCliDownloadUrl:
+    description: 'Checkmarx CLI Download URL (e.g. https://download.checkmarx.com/9.0.0/Plugins/CxConsolePlugin-2020.2.11.zip)'
+  cxCliVersionFileName:
+    description: 'Checkmarx CLI Version File Name (e.g. CxConsolePlugin-2020.2.11)'
+  cxCmdExecuted:
+    description: 'Checkmarx CLI Executed Command (e.g. ./cxcli/runCxConsole.sh Scan -CxServer...)'
+  cxUsername:
+    description: 'Checkmarx Username'
+  cxToken:
+    description: 'Checkmarx Token'
+  cxPassword:
+    description: 'Checkmarx Password'
+  cxTeam:
+    description: 'Checkmarx Team'
+  cxProject:
+    description: 'Checkmarx Project Name'
+  cxPreset:
+    description: 'If not provided, will use preset defined in existing project or, for a new project, the default preset.'
+  cxHigh:
+    description: 'Threshold for High Severity Vulnerabilities'
+  cxMedium:
+    description: 'Threshold for Medium Severity Vulnerabilities'
+  cxLow:
+    description: 'Threshold for Low Severity Vulnerabilities'
+  cxComment:
+    description: 'Saves a comment with the scan results. For example -comment important scan.'
+  cxForceScan:
+    description: 'Force scan on source code, which has not been changed since the last scan of the same project. (Not compatible with -Incremental option.)'
+  cxIncremental:
+    description: 'Run incremental scan instead of a full scan.'
+  cxExcludeFolders:
+    description: 'Comma separated list of folder name patterns to exclude from scan. For example, exclude all test and log folders: -locationPathExclude test*,log_*'
+  cxExcludeFiles:
+    description: 'Comma separated list of file name patterns to exclude from scan. For example, exclude all files with .class extension: -locationFilesExclude *.class'
+  cxConfiguration:
+    description: 'Code language configuration. Possible values are : Default Configuration, Japanese (Shift-JIS). If configuration is not set, Default Configuration is used.'
+  cxPrivate:
+    description: 'Scan will not be visible to other users.'
+  cxReportXML:
+    description: 'SAST Scan Report in XML format'
+  cxReportPDF:
+    description: 'SAST Scan Report in PDF format'
+  cxReportRTF:
+    description: 'SAST Scan Report in RTF format'
+  cxReportCSV:
+    description: 'SAST Scan Report in CSV format'
+  cxVerbose:
+    description: 'Turns on verbose mode. All messages and events will be sent to the console or log file.'
+  cxOsaHigh:
+    description: 'OSA high severity vulnerability threshold. If the number of high vulnerabilities exceeds the threshold, scan will end with an error (see Error/Exit Codes).'
+  cxOsaMedium:
+    description: 'OSA medium severity vulnerability threshold. If the number of medium vulnerabilities exceeds the threshold, scan will end with an error (see Error/Exit Codes).'
+  cxOsaLow:
+    description: 'OSA low severity vulnerability threshold. If the number of high vulnerabilities exceeds the threshold, scan will end with an error (see Error/Exit Codes).'
+  cxOsaLocationPath:
+    description: 'Local or network path to sources or source repository branch. May include multiple list of folders (local or shared) separated by comma.'
+  cxOsaArchiveToExtract:
+    description: 'Comma separated list of file extensions to extract in the OSA scan.
+    For example: -OsaArchiveToExtract *.zip extracts only files with .zip extension.'
+  cxOsaFilesInclude:
+    description: 'Comma separated list of file name patterns to exclude from the OSA scan. 
+    For example: *.dll will include only dll files.'
+  cxOsaFilesExclude:
+    description: 'Comma separated list of file name patterns to exclude from the OSA scan. 
+    Exclude extensions by using *.<extension>, or exclude files by using */<file>.
+    Examples: -OsaFilesExclude *.class excludes all files which start with the .class.
+    Examples: -OsaFilesExclude */plexus-utils-1.5.6.jar excludes all files which start with plexus-utils-1.5.6.jar.'
+  cxOsaPathExclude:
+    description: 'Comma separated list of folder path patterns to exclude from the OSA scan. 
+    For example: -OsaPathExclude test excludes all folders which start with test prefix.'
+  cxOsaReportHtml:
+    description: 'Generate CxOSA HTML report.'
+  cxOsaReportPDF:
+    description: 'Generate CxOSA PDF report.'
+  cxOsaDepth:
+    description: 'Extraction depth of files to include in the OSA scan.'
+  cxExecutePackageDependency:
+    description: 'Retrieve all supported package dependencies before performing OSA scan (see Remarks section).'
+  cxOsaJson:
+    description: 'Generate CxOSA JSON report.'
+  cxScaUsername:
+    description: 'SCA Username'
+  cxScaPassword:
+    description: 'SCA Password'
+  cxScaAccount:
+    description: 'SCA Account Name'
+  cxScaApiUrl:
+    description: 'SCA API URL'
+  cxScaAcessControlUrl:
+    description: 'SCA Access Control URL'
+  cxScaWebAppUrl:
+    description: 'SCA Web App URL'
+  cxScaHigh:
+    description: 'SCA High Threshold'
+  cxScaMedium:
+    description: 'SCA Medium Threshold'
+  cxScaLow:
+    description: 'SCA Low Threshold'
+  cxScaLocationPath:
+    description: 'SCA Location Path'
+  cxScaFilesInclude:
+    description: 'SCA Files Include'
+  cxScaFilesExclude:
+    description: 'SCA Files Exclude'
+  cxScaPathExclude:
+    description: 'SCA Folders Exclude'
+  cxCheckPolicy:
+    description: 'This parameter will break the build if the CxOSA policy is violated.'
+  cxSkipIfFail:
+    description: 'Skip Checkmarx Action Step if Fail'
+  cxTrustedCertificates:
+    description: 'Trust Self-signed Certificates'
+  cxGithubToken:
+    description: 'Github Token Secret'
+  cxGithubIssues:
+    description: 'Create Github Issues'
+  cxGithubLabels:
+    description: 'Github Labels for Issues created'
+  cxGithubAssignees:
+    description: 'Github Assignees for Issues created'
+  cxGithubMilestone:
+    description: 'Github Milestone for Issues created'
+runs:
+  using: 'node12'
+  main: 'src/index.js'
+branding:
+  icon: 'check'
+  color: 'green'
